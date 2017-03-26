@@ -5,14 +5,17 @@ const MongoClient= require('mongodb').MongoClient
 
 app.use(bodyParser.urlencoded({extended: true}))
 
+var port = process.env.PORT 
+
+if (port==undefined) {port = 3000}
 var db
 MongoClient.connect('mongodb://admin:Password123@ds143000.mlab.com:43000/mongoloid', (err, database) => {
   if(err) return console.log('Error connecting to Mongo database: \n ', err);
 
 db = database
 
-app.listen(3000, function() {  
-  console.log('Server is listening on 3000')
+app.listen(port, function() {  
+  console.log('Server is listening on ', port)
 })
 
 })
