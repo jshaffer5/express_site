@@ -21,20 +21,33 @@ app.listen(port, function() {
 })
 
 app.get('/', (req, res) => {
-  var cursor = db.collection('quotes').find().toArray(function(err, results) {
-  console.log(results)
-  
-  app.set('view engine', 'ejs')
-  // renders index.ejs
-    res.render('index.ejs', {quotes: results})
-})
+  db.collection('quotes').find().toArray(function(err, results1) {
+    db.collection('listJ').find().toArray( (err, results2) => {
+    
+    app.set('view engine', 'ejs')
+    // renders index.ejs
+    res.render('index.ejs', {quotes: results1, listJ: results2}) 	
+    console.log('r2 holds: ', results2)
+    console.log('r1 holds: ', results1)
+    })
+
+  })
 })
 
 app.post('/quotes', (req, res) => {
   db.collection('quotes').save(req.body, (err, result) => {
     if (err) return console.log(err)
 
-    console.log('Database Post: \n', req.body)
+    console.log('Database listA Post: \n', req.body)
+    res.redirect('/')
+  })
+})
+
+app.post('/josh_list', (req, res) => {
+  db.collection('listJ').save(req.body, (err, result) => {
+    if (err) return console.log(err)
+
+    console.log('Database listJ Post: \n', req.body)
     res.redirect('/')
   })
 })

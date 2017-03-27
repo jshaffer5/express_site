@@ -22,6 +22,23 @@
     <input type="text" placeholder="description" name="quote">
     <button type="submit">Submit</button>
   </form>
+
+  <h1>Josh's List</h1>
+  Josh is the most wonderful person in the world. He is:
+  
+  <ul class="quotes">
+  <% for(var i=0; i<listJ.length; i++) {%>
+    <li class="quote">
+      <span><%= listJ[i].item %></span>
+    </li>
+  <% } %>
+  </ul>
+
+  <form action="/josh_list" method="POST">
+    <!--input type="text" placeholder="name" name="name"-->
+    <input type="text" placeholder="description" name="item">
+    <button type="submit">Submit</button>
+  </form>
 </body>
 </html>
 
